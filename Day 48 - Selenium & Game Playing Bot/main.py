@@ -32,4 +32,14 @@ print(bug_link.text)
 event_times = driver.find_elements(By.CSS_SELECTOR, ".event-widget time")
 # print([event_time.text for event_time in event_times])
 event_names = driver.find_elements(By.CSS_SELECTOR, ".event-widget li a")
-print([event_name.text for event_name in event_names])
+# print([event_name.text for event_name in event_names])
+
+events = {}
+
+for n in range(len(event_times)):
+    events[n] = {
+        "time": event_times[n].text,
+        "name": event_names[n].text
+    }
+
+print(events)
