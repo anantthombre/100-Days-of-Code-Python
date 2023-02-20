@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
 
 date = input("Which year do you want to travel to? Enter the date in this format YYYY-MM-DD: ")
 
@@ -30,3 +32,72 @@ songs_list = [song.getText().strip() for song in songs_title]
 #     songs_list.append(song.get_text().strip())
 
 print(songs_list)
+
+sp = spotipy.Spotify(
+    auth_manager=SpotifyOAuth(
+        scope="playlist-modify-public",
+        redirect_uri="http://example.com",
+        client_id="41a202cdcc8f40fe86593d1e6925de1b",
+        client_secret="9ee3b279bf174cef94933d2dfb30c591",
+        show_dialog=True,
+        cache_path="token.txt"
+    )
+)
+user_id = sp.current_user()["id"]
+# print(user_id)
+
+# song_uris = []
+# year = date.split("-")[0]
+# for song in songs_list:
+#     result = sp.search(q=f"track:{song} year:{year}", type="track")
+#     print(result)
+#     try:
+#         uri = result["tracks"]["items"][0]["uri"]
+#         song_uris.append(uri)
+#     except IndexError:
+#         print(f"{song} doesn't exist in Spotify. Skipped.")
+
+
+#Creating a new private playlist in Spotify
+# playlist = sp.user_playlist_create(user=user_id, name=f"{date} Billboard 100", public=True)
+# print(playlist)
+
+#Adding songs found into the new playlist
+# sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
+
+
+# Create a Spotify Playlist and get the Playlist ID
+playlist = sp.user_playlist_create(
+    user=user_id,
+    name=f'Hot 100: {date}',
+    public=False,
+    # collaborative=False,
+    description='Hot 100 from billboard.com'
+)
+
+# print(response)  # Print the response to examine the structure
+playlist_id = playlist["id"]  # This is used when you add tracks to the playlist
+
+# Search Spotify for tracks and add the URI to list
+song_uris = []
+for song in songs_list:
+    song_details = sp.search(
+        q=f"track:{song}",  # year:{year}",
+        limit=1,
+        type="track",
+        market="GB",  # market="from_token",
+    )
+    try:
+        song_uri = song_details["tracks"]["items"][0]["uri"]
+        # print(song_uri)
+        song_uris.append(song_uri)
+    except IndexError:
+        print(f"{song} doesn't exist on Spotify.")
+
+    
+    # Add tracks to Spotify Playlist
+sp.playlist_add_items(
+    playlist_id=playlist_id,
+    items=song_uris,
+    position=None
+)
