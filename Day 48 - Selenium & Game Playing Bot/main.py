@@ -28,3 +28,8 @@ print(documentation_link.text)
 
 bug_link = driver.find_element(By.XPATH, "/html/body/div/footer/div[2]/div/ul/li[3]/a")
 print(bug_link.text)
+
+event_times = driver.find_elements(By.CSS_SELECTOR, ".event-widget time")
+# print([event_time.text for event_time in event_times])
+event_names = driver.find_elements(By.CSS_SELECTOR, ".event-widget li a")
+print([event_name.text for event_name in event_names])
