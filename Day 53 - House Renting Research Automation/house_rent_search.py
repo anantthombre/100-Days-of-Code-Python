@@ -8,15 +8,22 @@ from selenium.webdriver.chrome.options import Options
 # import time
 
 # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+browser = webdriver.Safari()
 
-driver.get("https://www.zillow.com/")
+# makes the browser wait if it can't find an element
+browser.implicitly_wait(10)
 
-time.sleep(30)
+browser.get("http://google.com/")
+
+# driver.get("https://www.zillow.com/")
+
+# time.sleep(30)
 
 rent_button = driver.find_element(By.LINK_TEXT, "Rent")
 # print(rent_button.tag_name)
 rent_button.click()
 
+time.sleep(15)
 
 # while(True):
 #     pass
