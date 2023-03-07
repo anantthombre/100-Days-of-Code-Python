@@ -1,0 +1,8 @@
+[47537:259:0306/194311.891617:WARNING:chrome_main_delegate.cc(617)] This is Chrome version 110.0.5481.177 (not a warning)
+[47537:259:0306/194312.132970:ERROR:chrome_browser_main.cc(1019)] The use of Rosetta to run the x64 version of Chromium on Arm is neither tested nor maintained, and unexpected behavior will likely result. Please check that all tools that spawn Chromium are Arm-native.
+[47537:87043:0306/194315.841421:WARNING:backend_impl.cc(1816)] Destroying invalid entry.
+[47537:259:0306/194340.502446:WARNING:controller_impl.cc(1191)] Background download complete, client: 6, completion type: 0, file size:5084
+[47537:259:0306/194340.670634:WARNING:controller_impl.cc(1191)] Background download complete, client: 6, completion type: 0, file size:9419
+[47537:259:0306/194340.691201:WARNING:controller_impl.cc(1191)] Background download complete, client: 6, completion type: 0, file size:265060
+[47537:259:0306/194340.870635:WARNING:controller_impl.cc(1191)] Background download complete, client: 6, completion type: 0, file size:45066
+[47537:259:0306/194350.704828:WARNING:pref_notifier_impl.cc(41)] Pref observer for media_router.cast_allow_all_ips found at shutdown.
